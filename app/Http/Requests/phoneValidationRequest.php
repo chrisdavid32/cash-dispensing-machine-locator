@@ -24,7 +24,7 @@ class phoneValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'phone'=>'required|numeric|digit:11',
         ];
     }
 }
