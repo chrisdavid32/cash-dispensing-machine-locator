@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\statusController;
 use Illuminate\Http\Request;
 use App\Http\Requests\phoneValidationRequest;
 use App\Models\User;
+use App\Models\Verification;
 
 class phoneVerificationController extends Controller
 {
@@ -34,10 +35,12 @@ class phoneVerificationController extends Controller
     {
         $phoneNumber = $request->phone;
         try {
+            //check if phone  number exist in database
             $isDuplicate = $this->isDuplicationPhoneNumber($phoneNumber);
             if (!$isDuplicate) {
                 return  $this->notfound("No record found");
             }
+            // check if phone number is already verified
             $isVerifyPhone = User::wherePhone($phoneNumber)->wherePhone_verification('verify')->first();
             if($isVerifyPhone){
                 return $this->badrequest("Phone number is already verified."); 
@@ -62,7 +65,7 @@ class phoneVerificationController extends Controller
             return $this->created([
                 "verification_token" => $token
             ]);
-            // $this->created("Token sent to " . $phoneNumber);
+            
 
         } catch (\Exception $e) {
             $this->severerror($e->getMessage());
