@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Api\statusController;
-use Illuminate\Http\Request;
 use App\Http\Requests\phoneValidationRequest;
 use App\Models\User;
 use App\Models\Verification;
+use Illuminate\Http\Request;
 
 class phoneVerificationController extends Controller
 {
@@ -33,10 +32,11 @@ class phoneVerificationController extends Controller
     //resend token function
     public function resendToken(phoneValidationRequest $request)
     {
-        $phoneNumber = $request->phone;
+        
         try {
+            $phoneNumber = $request->phone;
             //check if phone  number exist in database
-            $isDuplicate = $this->isDuplicationPhoneNumber($phoneNumber);
+            $isDuplicate = $this->duplicatePhoneNumber($phoneNumber);
             if (!$isDuplicate) {
                 return  $this->notfound("No record found");
             }
@@ -54,7 +54,7 @@ class phoneVerificationController extends Controller
 
             //create a new token
             $token = $this->generateToken();
-
+            
             //save the token 
             Verification::create(['phone' => $phoneNumber, 'code' => $token]);
 

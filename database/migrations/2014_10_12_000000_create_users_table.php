@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('phone')->unique();
             $table->enum('phone_verification', ['verify', 'not_verify'])->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('email_verify')->nullable();
             $table->string('name')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

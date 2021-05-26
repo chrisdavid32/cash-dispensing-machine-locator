@@ -13,7 +13,7 @@ class phoneValidationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class phoneValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone'=>'required|numeric|digit:11',
+            'phone'=>'required|numeric|digits:11'
         ];
     }
 }
