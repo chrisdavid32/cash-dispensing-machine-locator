@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('phone')->unique();
-            $table->enum('phone_verification', ['verify', 'not_verify'])->nullable();
+            $table->enum('phone_verification', ['verify', 'not_verify'])->default('not_verify');
             $table->string('email')->unique()->nullable();
             $table->string('email_verify')->nullable();
             $table->string('name')->nullable();

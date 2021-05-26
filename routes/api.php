@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\phoneVerificationController;
+use App\Http\Controllers\Api\verifyTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::get('/tests', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::post('/initial', [phoneVerificationController::class, 'initial']);
     Route::post('/resendToken', [phoneVerificationController::class, 'resendToken']);
+    Route::post('/verifyToken', [verifyTokenController::class, 'verifyToken']);
+
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
