@@ -13,7 +13,7 @@ class emailValidateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class emailValidateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|email',
+            'phone' => 'required|exists:users,phone'
         ];
     }
 }
