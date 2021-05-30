@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Email_verify extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'phone',
+        'email',
+        'token',
+    ];
 }
